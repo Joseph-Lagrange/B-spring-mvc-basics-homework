@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class RegisterRequest {
 
     @Pattern(regexp = "[a-zA-Z0-9_]{3,10}")
     private String username;

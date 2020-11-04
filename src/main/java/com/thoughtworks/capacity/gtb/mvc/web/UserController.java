@@ -1,6 +1,6 @@
 package com.thoughtworks.capacity.gtb.mvc.web;
 
-import com.thoughtworks.capacity.gtb.mvc.model.User;
+import com.thoughtworks.capacity.gtb.mvc.model.RegisterRequest;
 import com.thoughtworks.capacity.gtb.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestBody @Valid User user) {
-        userService.register(user);
+    public void register(@RequestBody @Valid RegisterRequest request) {
+        userService.register(request);
     }
 
 
