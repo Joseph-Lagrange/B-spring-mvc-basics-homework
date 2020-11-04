@@ -54,4 +54,24 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResult> handle(ConstraintViolationException ex) {
+        Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+        final int[] count = {0};
+        StringBuilder message = new StringBuilder();
+        violations.forEach(c -> {
+            if (count[0] == violations.size() - 1) {
+                message.append(c.getMessage());
+            } else {
+                message.append(c.getMessage()).append(" & ");
+                count[0]++;
+            }
+        });
+        ErrorResult errorResult = ErrorResult.builder()
+                .code(HttpStatus.BAD_REQUEST.value())
+                .message(message.toString())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+    }
+
 }
