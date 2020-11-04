@@ -1,4 +1,4 @@
-package com.thoughtworks.capacity.gtb.mvc.domain;
+package com.thoughtworks.capacity.gtb.mvc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
