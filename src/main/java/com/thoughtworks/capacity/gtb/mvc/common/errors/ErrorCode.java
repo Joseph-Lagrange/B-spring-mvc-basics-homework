@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 
 public enum ErrorCode {
 
-    USERNAME_ALREADY_EXIST(10000, "username is already exist");
+    USERNAME_ALREADY_EXIST(10000, "username is already exist"),
+    USER_NOT_REGISTER(10001, "user is not register"),
+    PASSWORD_IS_INVALID(10002, "password is invalid");
 
     private static final Set<String> ERROR_CODE_VALUES = ImmutableSet.copyOf(
             Arrays.stream(values()).map(Enum::toString).collect(Collectors.toSet())

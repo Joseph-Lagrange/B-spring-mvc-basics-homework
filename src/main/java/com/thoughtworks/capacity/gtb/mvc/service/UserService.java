@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.thoughtworks.capacity.gtb.mvc.common.errors.ErrorCode;
 import com.thoughtworks.capacity.gtb.mvc.common.exceptions.BadRequestException;
 import com.thoughtworks.capacity.gtb.mvc.domain.User;
+import com.thoughtworks.capacity.gtb.mvc.model.LoginResponse;
 import com.thoughtworks.capacity.gtb.mvc.model.RegisterRequest;
 
 import java.util.Map;
@@ -32,5 +33,21 @@ public class UserService {
                 .password(request.getPassword())
                 .email(request.getEmail())
                 .build());
+    }
+
+    public LoginResponse login(String username, String password) {
+        if (!userMap.containsKey(username)) {
+            throw new BadRequestException(ErrorCode.USER_NOT_REGISTER);
+        }
+        User user = userMap.get(username);
+        if (!user.getPassword().equals(password)) {
+            throw new BadRequestException(ErrorCode.PASSWORD_IS_INVALID);
+        }
+        return LoginResponse.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .build();
     }
 }
